@@ -59,6 +59,7 @@ public class MergeWordsListTask extends DefaultTask {
             parser.parse(inputSource, new MySaxHandler(allWords));
             System.out.println("Loaded " + allWords.size() + " words in total...");
             inputStream.close();
+			System.out.println("Closed " + inputFile.getName());
         }
 
         // discarding unwanted words
@@ -78,7 +79,7 @@ public class MergeWordsListTask extends DefaultTask {
                     .forEach(
                             word ->
                                     WordListWriter.writeWordWithRuntimeException(
-                                            writer, word.getWord(), word.getFreq()));
+                                            writer, word.getWord(), word.getFreq(), word.getFreqAbs()));
             System.out.println("Done.");
         }
     }
@@ -131,6 +132,7 @@ public class MergeWordsListTask extends DefaultTask {
         private boolean inWord;
         private StringBuilder word = new StringBuilder();
         private int freq;
+        private long freqabs; 
 
         public MySaxHandler(HashMap<String, WordWithCount> allWords) {
             this.allWords = allWords;
@@ -143,6 +145,7 @@ public class MergeWordsListTask extends DefaultTask {
             if (qName.equals("w")) {
                 inWord = true;
                 freq = Integer.parseInt(attributes.getValue("f"));
+				freqabs = Long.parseLong(attributes.getValue("abs"));
                 word.setLength(0);
             } else {
                 inWord = false;
@@ -193,7 +196,7 @@ public class MergeWordsListTask extends DefaultTask {
         public void endElement(String uri, String localName, String qName) throws SAXException {
             super.endElement(uri, localName, qName);
             if (qName.equals("w") && inWord) {
-                WordWithCount wordWithCount = new WordWithCount(word.toString(), freq);
+                WordWithCount wordWithCount = new WordWithCount(word.toString(), freq, freqabs);
                 if (allWords.containsKey(wordWithCount.getKey())) {
                     allWords.get(wordWithCount.getKey()).addOtherWord(wordWithCount);
                 } else {

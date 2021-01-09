@@ -113,7 +113,8 @@ class Parser {
                                 word ->
                                         new WordWithCount(
                                                 word.getWord(),
-                                                1 + (int) (word.getFreq() * maxFrequencyFactor)))
+                                                1 + (int) (word.getFreq() * maxFrequencyFactor),
+                                                word.getFreqAbs()))
                         .collect(Collectors.toList());
 
         System.out.println("Creating output XML file...");
@@ -122,7 +123,7 @@ class Parser {
             sortedList.forEach(
                     word ->
                             WordListWriter.writeWordWithRuntimeException(
-                                    wordListWriter, word.getWord(), word.getFreq()));
+                                    wordListWriter, word.getWord(), word.getFreq(), word.getFreqAbs()));
             System.out.println("Done.");
         }
     }

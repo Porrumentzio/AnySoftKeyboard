@@ -24,18 +24,19 @@ class WordListWriter implements Closeable {
     }
 
     public static void writeWordWithRuntimeException(
-            WordListWriter writer, String word, int frequency) {
+            WordListWriter writer, String word, int frequency, long freqabs) {
         try {
-            writer.addEntry(word, frequency);
+            writer.addEntry(word, frequency, freqabs);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void addEntry(String word, int frequency) throws IOException {
+    public void addEntry(String word, int frequency, long freqabs) throws IOException {
         mXmlWriter
                 .writeEntity("w")
                 .writeAttribute("f", Integer.toString(frequency))
+				.writeAttribute("abs", Long.toString(freqabs))
                 .writeText(word)
                 .endEntity();
         mWordsWritten++;

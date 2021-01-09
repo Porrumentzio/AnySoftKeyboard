@@ -1,7 +1,7 @@
 ext.status_icon_text = "eo"
 
-ext.dictionaryInputPossibleCharacters = "ABDCĈEFGĜHĤIJĴKLNMOPRSŜTUŬVZabdcĉefgĝhĥijĵklnmoprsŝtuŭvz'-".toCharArray()
-// ext.dictionaryInputAdditionalInnerCharacters = "ÁÀÂÅÄǞĄĀĆČÇĎĐḐÉÈÊĚËĘĒĞĢÍÌÎÏĪİĹĽŁĻŃŇÑŅÓÒÔÖŐÕȬȮȰŌQŔŘŖŚŠŞSSŤȚÚÙÛŮÜŰŪWẂẀŴẄXYÝŶŸŹŽŻẞáàâåäǟąāćčçďđḑéèêěëęēğģíìîïīİĺľłļńňñņóòôöőõȭȯȱōqŕřŗśšşßťțúùûůüűūwẃẁŵẅxyýŷÿźžż".toCharArray()
+ext.dictionaryInputPossibleCharacters = "ABDCĈEFGĜHĤIJĴKLNMOPRSŜTUŬVZabdcĉefgĝhĥijĵklnmoprsŝtuŭvz".toCharArray()
+ext.dictionaryInputAdditionalInnerCharacters = "-".toCharArray()
 
 
 apply from: "$rootDir/addons/gradle/language_pack_lib.gradle"
