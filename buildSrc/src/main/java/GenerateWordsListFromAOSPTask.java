@@ -26,7 +26,7 @@ import org.gradle.api.tasks.TaskAction;
 @CacheableTask
 public class GenerateWordsListFromAOSPTask extends DefaultTask {
     private static final Pattern mWordLineRegex =
-			Pattern.compile("^\\s*word=([\\w\\p{L}'\"-]+),f=(\\d+),abs=(\\d+).*$");
+            Pattern.compile("^\\s*word=([\\w\\p{L}'\"-]+),f=(\\d+),abs=(\\d+).*$");
 
     private File inputFile;
     private File outputWordsListFile;
@@ -66,7 +66,7 @@ public class GenerateWordsListFromAOSPTask extends DefaultTask {
                 if (matcher.matches()) {
                     String word = matcher.group(1);
                     int frequency = Integer.parseInt(matcher.group(2));
-					long freqabs = Long.parseLong(matcher.group(3));
+                    long freqabs = Long.parseLong(matcher.group(3));
                     wordListWriter.addEntry(word, frequency, freqabs);
                     if ((wordsWritten % 50000) == 0) {
                         System.out.print("." + ((100 * read) / inputSize) + "%.");

@@ -36,7 +36,7 @@ class WordListWriter implements Closeable {
         mXmlWriter
                 .writeEntity("w")
                 .writeAttribute("f", Integer.toString(frequency))
-				.writeAttribute("abs", Long.toString(freqabs))
+                .writeAttribute("abs", Long.toString(freqabs))
                 .writeText(word)
                 .endEntity();
         mWordsWritten++;

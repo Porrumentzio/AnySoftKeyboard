@@ -21,20 +21,20 @@ class WordWithCount implements Comparable<WordWithCount> {
     private final String mKey;
     private final Map<String, Integer> mWordVariants = new HashMap<>();
     private int mFreq;
-    private long mFreqAbs; 
+    private long mFreqAbs;
 
     public WordWithCount(String word) {
         mKey = word.toLowerCase();
         mWordVariants.put(word, 1);
         mFreq = 0;
-		mFreqAbs = 1;
+        mFreqAbs = 1;
     }
 
     public WordWithCount(String word, int frequency, long freqabs) {
         mKey = word.toLowerCase();
         mWordVariants.put(word, 1);
         mFreq = frequency;
-        mFreqAbs = freqabs; 
+        mFreqAbs = freqabs;
     }
 
     public String getKey() {
@@ -57,14 +57,14 @@ class WordWithCount implements Comparable<WordWithCount> {
     public int getFreq() {
         return mFreq;
     }
-	
+
     public long getFreqAbs() {
         return mFreqAbs;
     }
 
     public void addFreq(String word) {
         if (mFreq < Integer.MAX_VALUE) mFreq++;
-        mFreqAbs++; 
+        mFreqAbs++;
         mWordVariants.compute(word, (s, usages) -> usages == null ? 1 : usages + 1);
     }
 

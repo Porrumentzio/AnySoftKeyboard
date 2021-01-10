@@ -39,6 +39,7 @@ public class MakeDictionaryPlugin implements Plugin<Project> {
                                 MergeWordsListTask.class,
                                 task -> {
                                     task.setInputWordsListFiles(new File[0]);
+                                    task.setDiscardListFile(project.file("dictionary/discard.txt"));
                                     task.setOutputWordsListFile(
                                             new File(dictionaryOutputDir, "words_merged.xml"));
                                     task.setMaxWordsInList(300000);

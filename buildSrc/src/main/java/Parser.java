@@ -85,7 +85,9 @@ class Parser {
 
         System.out.println("Sorting list...");
         List<WordWithCount> sortedList = new ArrayList<>(mWords.values());
-        Collections.sort(sortedList);
+        // Collections.sort(sortedList); // sort by frequency descending!!!
+        // The problem here is that the prebuild files are merged into the list later on!
+        Collections.sort(sortedList, (w1, w2) -> w2.getFreq() - w1.getFreq());
 
         if (mMaxListSize < sortedList.size()) {
             System.out.println("Removing over-the-limit words...");
@@ -98,10 +100,7 @@ class Parser {
                         .map(WordWithCount::getFreq)
                         .map(currentMaxFreq -> (double) currentMaxFreq)
                         .map(currentMaxFreq -> ((double) mMaxWordFrequency) / currentMaxFreq)
-                        .orElseThrow(
-                                () ->
-                                        new IllegalStateException(
-                                                "could not find max-frequency word. No words provided?"));
+                        .orElseThrow(() -> new IllegalStateException("could not find max-frequency word. No words provided?"));
         System.out.println(
                 String.format(
                         Locale.US,
@@ -167,10 +166,21 @@ class Parser {
 
     private char fixup(int intChar) {
         switch (intChar) {
-            case '’':
+            case '‘': // LEFT SINGLE QUOTATION MARK 0x2018
+            case '’': // RIGHT SINGLE QUOTATION MARK 0x2019
+            case '‚': // SINGLE LOW-9 QUOTATION MARK 0x201A
+            case '‛': // SINGLE HIGH-REVERSED-9 QUOTATION MARK 0x201B
+            case '′': // PRIME 0x2032
+            case '`': // GRAVE ACCENT 0x60
+            case '´': // ACUTE ACCENT 0xB4
+                     // It's an error to use the last two as apostrophe, but people do it.
                 return '\'';
-            case '”':
-            case '“':
+            case '“': // LEFT DOUBLE QUOTATION MARK 0x201C
+            case '”': // RIGHT DOUBLE QUOTATION MARK 0x201D
+            case '„': // DOUBLE LOW-9 QUOTATION MARK 0x201E
+            case '‟': // DOUBLE HIGH-REVERSED-9 QUOTATION MARK 0x201F
+            case 0x2033: // DOUBLE PRIME
+            case 0x2036: // REVERSED DOUBLE PRIME
                 return '\"';
             default:
                 return (char) intChar;
