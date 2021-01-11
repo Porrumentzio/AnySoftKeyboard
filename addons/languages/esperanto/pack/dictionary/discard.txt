@@ -386,7 +386,6 @@ mq
 mr
 ms
 mt
-mu
 mv
 mw
 mx
@@ -590,7 +589,6 @@ tm
 tn
 tp
 tq
-tr
 tt
 tu
 tv
@@ -795,7 +793,6 @@ zŭ
 ĉf
 ĉg
 ĉh
-ĉi
 ĉj
 ĉk
 ĉl
@@ -806,7 +803,6 @@ zŭ
 ĉr
 ĉs
 ĉt
-ĉu
 ĉv
 ĉw
 ĉx
@@ -826,7 +822,6 @@ zŭ
 ĝf
 ĝg
 ĝh
-ĝi
 ĝj
 ĝk
 ĝl
